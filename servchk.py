@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description="Manages and checks DHCP, DNS and F
 
 parser.add_argument('-c', '--check', nargs='+', choices=['dhcp', 'ftp', 'dns'])
 parser.add_argument('-ss', '--start-service', nargs='+', choices=['dhcp', 'ftp', 'dns'])
+parser.add_argument('-r', '--restart-service', nargs='+', choices=['dhcp', 'ftp', 'dns'])
 parser.add_argument('-st', '--stop-service', nargs='+', choices=['dhcp', 'ftp', 'dns'])
 parser.add_argument('-ci', '--check-interval', type=int)
 

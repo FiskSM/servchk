@@ -11,5 +11,5 @@ parser.add_argument('-st', '--stop-service', nargs='+', choices=['dhcp', 'ftp', 
 parser.add_argument('-ci', '--check-interval', type=int)
 
 pargs = parser.parse_args()
-print(pargs)
+#print(pargs)
 print(pargs.check)

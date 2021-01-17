@@ -21,8 +21,6 @@ parser.add_argument('-i', '--check-interval', nargs='?', type=int, default=5)
 
 pargs = parser.parse_args()
 
-print(pargs)
-
 args = cleanArgs(vars(pargs))
 
 if 'check' in args:

@@ -27,6 +27,9 @@ parser.add_argument('-i', '--check-interval', nargs='+', choices=['dhcp', 'ftp',
 pargs = parser.parse_args()
 args = cleanArgs(vars(pargs))
 
+if not args:
+    parser.print_help()
+
 if 'check' in args:
     for v in args['check']:
         st = subprocess.check_output(['systemctl', 'show', services[v], '--value', '-p', 'ActiveState'])

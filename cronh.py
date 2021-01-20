@@ -11,11 +11,6 @@ def editCronTab(args):
     subprocess.run(['rm', '/tmp/crontmp'])
 
 def updateCronTab(args):
-    try:
-        subprocess.run(['crontab', '-l', '>', '/tmp/crontmp'])
-    except:
-        print("Crontab file not present, generating the file...\n")
-        subprocess.run(['touch', '/tmp/crontmp'])
-
+    subprocess.run(['sudo', 'crontab', '-l', '>', '/tmp/crontmp'])
     editCronTab(args)
 

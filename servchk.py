@@ -29,7 +29,13 @@ args = cleanArgs(vars(pargs))
 
 if 'check' in args:
     for v in args['check']:
-        subprocess.run(['systemctl', 'status', services[v]])
+        st = subprocess.check_output(['systemctl', 'show', services[v], '--value', '-p', 'ActiveState'])
+        if st.decode('utf8') == 'active':
+            print(f'{v} service is currently running. For more information run:')
+            print(f'\tsystemctl status {services[v]}')
+        else:
+            print(f'{v} service is NOT running. It can be started with:')
+            print(f'\tsystemctl start {services[v]}')
 
 if 'start_service' in args:
     for v in args['start_service']:

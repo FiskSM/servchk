@@ -6,7 +6,7 @@ def editCronTab(args):
     path = pathlib.Path(__file__).parent.absolute()
 
     with open('/tmp/crontmp', 'a+') as f:
-        print(f'*/5 * * * * /usr/bin/python3 {path}/servchk.py -s {args}', file=f)
+        print(f'*/5 * * * * /usr/bin/python3 {path}/servchk.py -a {args}', file=f)
     subprocess.run(['sudo', 'crontab', '/tmp/crontmp'])
     subprocess.run(['rm', '/tmp/crontmp'])
 

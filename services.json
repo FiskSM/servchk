@@ -1,0 +1,5 @@
+{
+  "dhcp": "dhcpd",
+  "dns": "named",
+  "ftp": "vsftpd"
+}

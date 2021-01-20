@@ -12,7 +12,7 @@ def cleanArgs(args):
             del args[k]
     return args
 
-curpath = Path(__file__).parent.absolute()
+curpath = getPath()
 services = json.load(open(f'{curpath}/services.json'))
 
 parser = argparse.ArgumentParser(description="Manages and checks DHCP, DNS and FTP services running on the server")
@@ -30,6 +30,7 @@ args = cleanArgs(vars(pargs))
 if not args:
     parser.print_help()
 
+print(args['check_interval'])
 if 'check' in args:
     for v in args['check']:
         st = subprocess.check_output(['systemctl', 'show', services[v], '--value', '-p', 'ActiveState'])
@@ -59,5 +60,5 @@ if 'check_start' in args:
             subprocess.run(['sudo', 'systemctl', 'start', services[v]])
 
 if 'check_interval' in args:
-    editCronTab(args['check_interval'])
+    updateCronTab(args['check_interval'])
 

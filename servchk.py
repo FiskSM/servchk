@@ -30,14 +30,13 @@ args = cleanArgs(vars(pargs))
 if not args:
     parser.print_help()
 
-print(args['check_interval'])
 if 'check' in args:
     for v in args['check']:
-        st = subprocess.check_output(['systemctl', 'show', services[v], '--value', '-p', 'ActiveState'])
-        if st.decode('utf8') == 'active':
+        try:
+            subprocess.check_output(['systemctl', 'is-active', services[v]])
             print(f'{v} service is currently running. For more information run:')
             print(f'\tsystemctl status {services[v]}')
-        else:
+        except:
             print(f'{v} service is NOT running. It can be started with:')
             print(f'\tsystemctl start {services[v]}')
 
@@ -55,8 +54,9 @@ if 'stop_service' in args:
 
 if 'check_start' in args:
     for v in args['check_start']:
-        st = subprocess.check_output(['systemctl', 'show', services[v], '--value', '-p', 'ActiveState'])
-        if st.decode('utf8') != 'active':
+        try:
+            subprocess.check_output(['systemctl', 'is-active', services[v]])
+        except:
             subprocess.run(['sudo', 'systemctl', 'start', services[v]])
 
 if 'check_interval' in args:
